@@ -315,7 +315,7 @@
 
     <div class="sidebar">
         <div class="brand" id="brandContainer">
-            <i class="fa-solid fa-chalkboard-user" id="brandIcon"></i>
+            <i class="fa-solid fa-cubes" id="brandIcon"></i>
             <span id="brandText"></span>
         </div>
         <div class="nav">
@@ -460,7 +460,6 @@
         };
         animate();
 
-        const brandIcon = document.getElementById('brandIcon');
         const typeIcon = document.getElementById('type-icon');
         
         const icons = ['fa-bolt', 'fa-shield-halved', 'fa-unlock', 'fa-gauge-high', 'fa-cubes', 'fa-gamepad', 'fa-layer-group', 'fa-globe'];
@@ -472,8 +471,7 @@
         }, 1200);
 
         setTimeout(() => {
-            document.title = 'CHUG · HOME';
-            brandIcon.className = 'fa-solid fa-cubes';
+            document.title = 'CHUG';
         }, 2000);
     </script>
 </body>

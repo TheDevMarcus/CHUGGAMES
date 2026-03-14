@@ -75,19 +75,18 @@
             margin-bottom: 40px;
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 10px;
             letter-spacing: -0.5px;
             text-shadow: 0 0 15px rgba(59, 130, 246, 0.8);
             padding-left: 8px;
         }
         .brand i {
-            font-size: 40px;
+            font-size: 24px;
             color: var(--primary);
             filter: drop-shadow(0 0 8px var(--primary));
         }
         .brand span {
-            display: none;
+            display: inline;
         }
         .nav {
             display: flex;
@@ -97,25 +96,26 @@
         .nav-item {
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 16px 0;
+            gap: 14px;
+            padding: 12px 16px;
             color: var(--text-secondary);
             text-decoration: none;
             border-radius: 10px;
             transition: all 0.25s ease;
             border: 1px solid transparent;
-            font-size: 28px;
+            font-weight: 500;
+            font-size: 15px;
             position: relative;
             overflow: hidden;
         }
-        .nav-item span {
-            display: none;
-        }
         .nav-item i {
-            width: auto;
+            width: 22px;
             text-align: center;
-            font-size: 28px;
+            font-size: 17px;
             transition: 0.25s;
+        }
+        .nav-item span {
+            display: inline;
         }
         .nav-item:hover {
             background: rgba(59, 130, 246, 0.15);
@@ -197,15 +197,36 @@
             width: 100%;
         }
         .glitch-title {
-            display: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 100px;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 20px;
+            color: white;
+            position: relative;
+            display: inline-block;
+            filter: drop-shadow(0 0 25px rgba(59,130,246,0.5));
+            letter-spacing: -2px;
+            text-shadow: 0 0 10px rgba(59,130,246,0.3);
+            opacity: 0;
+            transform: scale(0.96);
+            animation: titleGlow 0.7s ease-out forwards;
+            animation-delay: 0.3s;
+        }
+        @keyframes titleGlow {
+            0% { opacity: 0; transform: scale(0.96); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @media (max-width: 700px) {
+            .glitch-title { font-size: 72px; }
         }
         .status-pill {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
+            gap: 12px;
             background: rgba(8, 18, 32, 0.8);
             border: 1px solid rgba(59,130,246,0.3);
-            padding: 12px 30px;
+            padding: 8px 30px;
             border-radius: 100px;
             backdrop-filter: blur(16px);
             margin-bottom: 50px;
@@ -219,11 +240,23 @@
         }
         #type-icon {
             color: var(--accent);
-            font-size: 24px;
+            font-size: 16px;
         }
-        .type-text, .cursor, .quote-refresh {
-            display: none;
+        .type-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: #e2e8f0;
+            letter-spacing: 1px;
         }
+        .cursor {
+            width: 8px;
+            height: 2px;
+            background: var(--primary);
+            display: inline-block;
+            animation: blink 1s infinite;
+            margin-left: 3px;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
         .cards-container {
             display: flex;
             gap: 30px;
@@ -236,7 +269,7 @@
             border: 1px solid rgba(255,255,255,0.03);
             backdrop-filter: blur(12px);
             border-radius: 28px;
-            padding: 34px 24px;
+            padding: 34px 24px 30px;
             width: 260px;
             text-align: center;
             cursor: pointer;
@@ -273,15 +306,15 @@
             box-shadow: 0 30px 45px -12px black, 0 0 0 1px rgba(59,130,246,0.4);
         }
         .card-icon-box {
-            width: 120px;
-            height: 120px;
+            width: 75px;
+            height: 75px;
             background: rgba(10, 20, 35, 0.8);
-            border-radius: 32px;
+            border-radius: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto;
-            font-size: 56px;
+            margin: 0 auto 24px;
+            font-size: 34px;
             color: #9bbaff;
             transition: 0.4s;
             border: 1px solid rgba(255,255,255,0.1);
@@ -294,8 +327,18 @@
             transform: rotateY(180deg) scale(1.02);
             border-color: rgba(255,255,255,0.3);
         }
-        .glass-card h3, .glass-card p {
-            display: none;
+        .glass-card h3 {
+            font-size: 23px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #fff;
+            letter-spacing: -0.3px;
+        }
+        .glass-card p {
+            font-size: 14px;
+            color: #8a99b3;
+            line-height: 1.5;
+            font-weight: 400;
         }
         .nav-item.active::after {
             content: '';
@@ -307,6 +350,19 @@
             border-radius: 50%;
             box-shadow: 0 0 10px var(--primary);
         }
+        .quote-refresh {
+            background: transparent;
+            border: none;
+            color: #5f7caf;
+            margin-left: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: 0.2s;
+        }
+        .quote-refresh:hover {
+            color: var(--accent);
+            transform: rotate(90deg);
+        }
     </style>
 </head>
 <body>
@@ -316,24 +372,24 @@
     <div class="sidebar">
         <div class="brand" id="brandContainer">
             <i class="fa-solid fa-cubes" id="brandIcon"></i>
-            <span id="brandText"></span>
+            <span id="brandText">CHUG</span>
         </div>
         <div class="nav">
             <a href="/index.html" class="nav-item active">
                 <i class="fa-solid fa-house"></i>
-                <span></span>
+                <span>Home</span>
             </a>
             <a href="/g.html" class="nav-item">
                 <i class="fa-solid fa-gamepad"></i>
-                <span></span>
+                <span>Games</span>
             </a>
             <a href="/a.html" class="nav-item">
                 <i class="fa-solid fa-layer-group"></i>
-                <span></span>
+                <span>Apps</span>
             </a>
             <a href="/p.html" class="nav-item">
                 <i class="fa-solid fa-globe"></i>
-                <span></span>
+                <span>Proxy</span>
             </a>
         </div>
         <div class="version">
@@ -344,13 +400,15 @@
 
     <div class="main">
         <div class="hero-container">
-            <div class="glitch-title" id="mainTitle"></div>
+            <div class="glitch-title" id="mainTitle">CHUG</div>
+            
+            <br>
             
             <div class="status-pill" id="statusPill">
                 <i id="type-icon" class="fa-solid fa-bolt"></i>
                 <div style="display: flex; align-items: center; gap: 6px;">
                     <span class="type-text" id="typewriter"></span><span class="cursor"></span>
-                    <button class="quote-refresh" id="refreshQuote"><i class="fa-solid fa-rotate-right"></i></button>
+                    <button class="quote-refresh" id="refreshQuote" title="new quote"><i class="fa-solid fa-rotate-right"></i></button>
                 </div>
             </div>
 
@@ -359,18 +417,24 @@
                     <div class="card-icon-box">
                         <i class="fa-solid fa-gamepad"></i>
                     </div>
+                    <h3>Games</h3>
+                    <p>On-demand titles. Low latency.</p>
                 </div>
 
                 <div class="glass-card" onclick="location.href='/a.html'">
                     <div class="card-icon-box">
                         <i class="fa-solid fa-layer-group"></i>
                     </div>
+                    <h3>Apps</h3>
+                    <p>Essential tools & utilities, ready.</p>
                 </div>
 
                 <div class="glass-card" onclick="location.href='#'">
                     <div class="card-icon-box">
                         <i class="fa-solid fa-globe"></i>
                     </div>
+                    <h3>Proxy</h3>
+                    <p>SOON TO COME</p>
                 </div>
             </div>
         </div>
@@ -460,15 +524,121 @@
         };
         animate();
 
-        const typeIcon = document.getElementById('type-icon');
-        
-        const icons = ['fa-bolt', 'fa-shield-halved', 'fa-unlock', 'fa-gauge-high', 'fa-cubes', 'fa-gamepad', 'fa-layer-group', 'fa-globe'];
-        let iconIndex = 0;
-        
-        setInterval(() => {
-            iconIndex = (iconIndex + 1) % icons.length;
-            typeIcon.className = `fa-solid ${icons[iconIndex]}`;
-        }, 1200);
+        const typeEl = document.getElementById('typewriter');
+        const iconEl = document.getElementById('type-icon');
+        const refreshBtn = document.getElementById('refreshQuote');
+
+        const fallbackQuotes = [
+            { text: "SYSTEM READY", icon: "fa-bolt" },
+            { text: "SECURE PROXY", icon: "fa-shield-halved" },
+            { text: "UNBLOCKED", icon: "fa-unlock" },
+            { text: "HIGH SPEED", icon: "fa-gauge-high" }
+        ];
+
+        let quotes = [];
+        let currentQuoteIndex = 0;
+        let charIdx = 0;
+        let isDeleting = false;
+        let typingTimeout;
+
+        function loadQuote(index) {
+            if (typingTimeout) clearTimeout(typingTimeout);
+            
+            if (!quotes.length) {
+                quotes = fallbackQuotes.slice();
+            }
+            currentQuoteIndex = (index + quotes.length) % quotes.length;
+            const current = quotes[currentQuoteIndex];
+            
+            iconEl.className = `fa-solid ${current.icon || 'fa-bolt'}`;
+            
+            charIdx = 0;
+            isDeleting = false;
+            typeEl.innerText = '';
+            
+            setTimeout(() => typeEffect(), 50);
+        }
+
+        function typeEffect() {
+            if (!quotes.length) {
+                quotes = fallbackQuotes.slice();
+            }
+            
+            const current = quotes[currentQuoteIndex] || { text: 'CHUG', icon: 'fa-bolt' };
+            const currentText = current.text || 'CHUG';
+            
+            iconEl.className = `fa-solid ${current.icon || 'fa-bolt'}`;
+            
+            typeEl.innerText = currentText.substring(0, charIdx);
+            
+            if (!isDeleting && charIdx < currentText.length) {
+                charIdx++;
+                typingTimeout = setTimeout(typeEffect, 70);
+            } else if (!isDeleting && charIdx === currentText.length) {
+                typingTimeout = setTimeout(() => { 
+                    isDeleting = true; 
+                    typeEffect(); 
+                }, 2400);
+            } else if (isDeleting && charIdx > 0) {
+                charIdx--;
+                typingTimeout = setTimeout(typeEffect, 40);
+            } else {
+                isDeleting = false;
+                currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+                const next = quotes[currentQuoteIndex];
+                iconEl.className = `fa-solid ${next.icon || 'fa-bolt'}`;
+                typingTimeout = setTimeout(typeEffect, 150);
+            }
+        }
+
+        async function fetchQuotes() {
+            try {
+                const response = await fetch('https://raw.githubusercontent.com/CHUGGAMES/CHUGGAMES.GITHUB.IO/refs/heads/main/backend/home/q.json');
+                if (!response.ok) throw new Error('network error');
+                const data = await response.json();
+                
+                if (Array.isArray(data) && data.length > 0) {
+                    quotes = data.map(item => ({
+                        text: item.text || 'CHUG',
+                        icon: item.icon || 'fa-bolt'
+                    }));
+                } else {
+                    quotes = fallbackQuotes.slice();
+                }
+            } catch (err) {
+                quotes = fallbackQuotes.slice();
+            }
+            
+            currentQuoteIndex = Math.floor(Math.random() * quotes.length);
+            const start = quotes[currentQuoteIndex];
+            iconEl.className = `fa-solid ${start.icon || 'fa-bolt'}`;
+            typeEl.innerText = ''; 
+            charIdx = 0; isDeleting = false;
+            setTimeout(typeEffect, 100);
+        }
+
+        refreshBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (quotes.length === 0) {
+                quotes = fallbackQuotes.slice();
+            }
+            let newIdx;
+            do {
+                newIdx = Math.floor(Math.random() * quotes.length);
+            } while (quotes.length > 1 && newIdx === currentQuoteIndex);
+            
+            if (typingTimeout) clearTimeout(typingTimeout);
+            
+            currentQuoteIndex = newIdx;
+            const fresh = quotes[currentQuoteIndex];
+            iconEl.className = `fa-solid ${fresh.icon || 'fa-bolt'}`;
+            charIdx = 0;
+            isDeleting = false;
+            typeEl.innerText = '';
+            typingTimeout = setTimeout(typeEffect, 60);
+        });
+
+        fetchQuotes();
 
         setTimeout(() => {
             document.title = 'CHUG';

@@ -173,9 +173,9 @@ body.topbar-mode .main-wrapper{padding-top:calc(var(--topbar-h)+26px);}
   font-family:'Syncopate',sans-serif;
   font-size:clamp(4rem,9vw,7.5rem);font-weight:700;
   letter-spacing:0.22em;line-height:0.9;
-  background:linear-gradient(145deg,#fff 0%,var(--p) 42%,var(--acc) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
   filter:drop-shadow(0 0 44px var(--p-glow));
+  display:inline-flex;
+  width:fit-content;
 }
 .tagline{
   margin-top:14px;font-size:0.92rem;color:var(--txt-d);font-weight:400;
@@ -188,6 +188,39 @@ body.topbar-mode .main-wrapper{padding-top:calc(var(--topbar-h)+26px);}
 .tagline-hint{font-size:0.58rem;color:var(--txt-d);letter-spacing:0.14em;font-family:'JetBrains Mono',monospace;opacity:0.5;margin-top:4px;}
 .cursor-char{color:var(--p);animation:blink 1s step-end infinite;}
 @keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+.wm-letter{
+  background:linear-gradient(145deg,#fff 0%,var(--p) 42%,var(--acc) 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  position:relative;display:inline-block;cursor:default;
+  transition:filter 0.18s;
+}
+.wm-letter:hover{filter:brightness(1.4) drop-shadow(0 0 12px var(--p-glow));}
+.wm-letter::after{
+  content:attr(data-tip);
+  position:absolute;bottom:calc(100% + 10px);left:50%;
+  transform:translateX(-50%) scale(0.85);
+  background:rgba(3,14,26,0.97);
+  border:1px solid var(--border-h);
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.62rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+  padding:5px 11px;border-radius:7px;white-space:nowrap;
+  opacity:0;pointer-events:none;
+  transition:opacity 0.18s,transform 0.18s;
+  box-shadow:0 6px 20px rgba(0,0,0,0.5);
+  -webkit-background-clip:unset !important;
+  background-clip:unset !important;
+  -webkit-text-fill-color:var(--txt-s) !important;
+  color:var(--txt-s);
+}
+.wm-letter::before{
+  content:'';position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);
+  border:5px solid transparent;border-top-color:var(--border-h);
+  opacity:0;pointer-events:none;transition:opacity 0.18s;
+}
+.wm-letter:hover::after{opacity:1;transform:translateX(-50%) scale(1);}
+.wm-letter:hover::before{opacity:1;}
 
 .stats-row{display:flex;gap:12px;justify-content:center;}
 .stat-card{
@@ -544,7 +577,9 @@ input:checked+.toggle-slider::before{transform:translateX(22px);}
     <div id="home-content" class="tab-content active">
       <div class="home-grid">
         <div>
-          <div class="wordmark">CHUG</div>
+          <div class="wordmark">
+            <span class="wm-letter" data-tip="Chip">C</span><span class="wm-letter" data-tip="Hill">H</span><span class="wm-letter" data-tip="Unblocked">U</span><span class="wm-letter" data-tip="Games">G</span>
+          </div>
           <div class="tagline" onclick="skipQuote()" title="Click for next quote">
             <span id="typewriterText"></span><span class="cursor-char">|</span>
           </div>
@@ -726,12 +761,9 @@ input:checked+.toggle-slider::before{transform:translateX(22px);}
 
 <script id="quotesData" type="application/json">
 [
-  "Did you know that this website was made by Chip Hill? Also The Founder Of Hillflow Brand 😎.",
   "Tiktok has almost been banned 3 times 😭.",
   "Remember Kids Youtube Shorts Is Brain Rot ❌.",
-  "Did you Know CHUG Means Chips Unblocked Games 🎮?",
-  "Minecraft On CHUG Was originally a easter egg 🥚.",
-  "Skibidi toilet, skibidi, skibidi toilet. Skibidi toilet, skibidi, skibidi toilet 🚽.",
+  "Did you Know CHUG Means Chip Hill's Unblocked Games 🎮?",
   "CHUG WAS A PASSION PROJECT AT FIRST 💻.",
   "CHUG is used world wide 🌍.",
   "We Update Every Week 🎉!",
@@ -876,6 +908,8 @@ function updateNavActive(tab){
   const tn=document.getElementById('tnav-'+tab);if(tn)tn.classList.add('active');
 }
 function switchTab(tab){
+  const titles={home:'CHUG - HOME',websites:'CHUG - WEBSITES',changelog:'CHUG - CHANGELOG',settings:'CHUG - SETTINGS'};
+  document.title=titles[tab]||'CHUG';
   document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
   document.getElementById(tab+'-content').classList.add('active');
   updateNavActive(tab);

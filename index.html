@@ -1104,7 +1104,7 @@ function skipQuote(){
 
 function renderLogs(logs){
   const feed=document.getElementById('devFeedBody'),full=document.getElementById('changelogFull');
-  if(!logs||!logs.length){const n='<div class="none-state">— NONE —</div>';if(feed)feed.innerHTML=n;if(full)full.innerHTML=n;return;}
+  if(!logs||!logs.length){const n='<div class="none-state">No Changelogs</div>';if(feed)feed.innerHTML=n;if(full)full.innerHTML=n;return;}
   const single=logs.length===1;
   const toEntry=(l,i)=>{
     const big=single||i===0;
@@ -1132,7 +1132,10 @@ function renderLogs(logs){
   if(localStorage.getItem('novaTopbar')==='true')document.body.classList.add('topbar-mode');
   try{const s=localStorage.getItem('novaApps');if(s)userApps=JSON.parse(s);}catch{}
   loadWebsiteData();
-  renderLogs([{title:"CHUG IS BACK!!!",message:"The gateway is live. Welcome back.",color:"var(--p)",author:"System"}]);
+  fetch('https://raw.githubusercontent.com/TheDevMarcus/CHUGGAMES/refs/heads/main/backend/updatelogs.json')
+    .then(r=>{if(!r.ok)throw new Error();return r.json();})
+    .then(data=>{const logs=Array.isArray(data)?data:(data.logs||data.updates||data.changelog||[]);renderLogs(logs.length?logs:[]);})
+    .catch(()=>renderLogs([]));
   qIdx=Math.floor(Math.random()*quotes.length);
   typeWriter();
 })();

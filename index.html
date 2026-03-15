@@ -724,10 +724,45 @@ input:checked+.toggle-slider::before{transform:translateX(22px);}
 
 <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importApps(event)">
 
+<script id="quotesData" type="application/json">
+[
+  "67777.",
+  "Tiktok has almost been banned 3 times 😭.",
+  "Remember Kids Youtube Shorts Is Brain Rot ❌.",
+  "Did you Know CUG Means Chips Unblocked Games 🎮?",
+  "Minecraft On CUG Was originally a easter egg 🥚.",
+  "Skibidi toilet, skibidi, skibidi toilet. Skibidi toilet, skibidi, skibidi toilet 🚽.",
+  "CUG WAS A PASSION PROJECT AT FIRST 💻.",
+  "Cug is used world wide 🌍.",
+  "We Update Every Week 🎉!",
+  "Minecraft is good for the environment ⛏.",
+  "I'm edging 🥩👊.",
+  "Is It Pink 🌊?",
+  "Imma Bout to bust 🥒!",
+  "Did you know adolf hitler had a girlfriend 😶‍🌫?",
+  "I Don't believe in human rights 🤪.",
+  "Dogs Can't Say No 😉.",
+  "Women Don't deserve rights 🧕.",
+  "Fortnite Is Just A Rip Off Of 1v1.lolヽ((◎д◎))ゝ.",
+  "Email Me For Special Milk 🧓.",
+  "Ctrl + Alt + Delete: the three stages of my workday 🔄.",
+  "In a world full of updates, be the bug fixer 🐞.",
+  "Sleep is for the weak, coffee is for the strong ☕️💪.",
+  "Commit early, commit often 📝.",
+  "In the game of love, sometimes you respawn alone 💔🎮.",
+  "Drain Out the Bad Energy 💔.",
+  "In this world where you can be anything be yourself 😇.",
+  "Life Is Like Fortnite Some Land High Ground Some have to build to it 🫶.",
+  "Everyone wants me dead bitch i'm already dead i've been dead for years ⚰.",
+  "Have you every been so alone that nobodys house feels like home 🏠."
+]
+</script>
+
 <script>
 let websiteApps=[],userApps=[],rotationInterval=null;
 let pCurrentLib='dayton_classic',performanceMode=false,currentParticleColor='#38b6ff',pTime=0;
-const quotes=["Did you know that this website was made by Chip Hill? Also The Founder Of Hillflow Brand 😎.","Tiktok has almost been banned 3 times 😭.","Remember Kids Youtube Shorts Is Brain Rot ❌.","Did you Know CUG Means Chips Unblocked Games 🎮?","Minecraft On CUG Was originally a easter egg 🥚.","Skibidi toilet, skibidi, skibidi toilet. Skibidi toilet, skibidi, skibidi toilet 🚽.","CUG WAS A PASSION PROJECT AT FIRST 💻.","Cug is used world wide 🌍.","We Update Every Week 🎉!","Minecraft is good for the environment ⛏.","I'm edging 🥩👊.","Is It Pink 🌊?","Imma Bout to bust 🥒!","Did you know adolf hitler had a girlfriend 😶‍🌫?","I Don't believe in human rights 🤪.","Dogs Can't Say No 😉.","Women Don't deserve rights 🧕.","Fortnite Is Just A Rip Off Of 1v1.lolヽ((◎д◎))ゝ.","Email Me For Special Milk 🧓.","Ctrl + Alt + Delete: the three stages of my workday 🔄.","In a world full of updates, be the bug fixer 🐞.","Sleep is for the weak, coffee is for the strong ☕️💪.","Commit early, commit often 📝.","In the game of love, sometimes you respawn alone 💔🎮.","Drain Out the Bad Energy 💔.","In this world where you can be anything be yourself 😇.","Life Is Like Fortnite Some Land High Ground Some have to build to it 🫶.","Everyone wants me dead bitch i'm already dead i've been dead for years ⚰.","Have you every been so alone that nobodys house feels like home 🏠."];
+let quotes=[];
+try{quotes=JSON.parse(document.getElementById('quotesData').textContent);}catch(e){quotes=["CUG is back!"];}
 
 function debounce(fn,d){let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),d);};}
 const debouncedFilter=debounce(filterWebsites,160);
@@ -866,21 +901,24 @@ async function loadWebsiteData(){
   if(grid)grid.innerHTML='<div class="loading-state"><div class="spin"></div>LOADING</div>';
   try{
     const res=await fetch('https://raw.githubusercontent.com/TheDevMarcus/CHUGGAMES/refs/heads/main/backend/apps.json');
-    if(!res.ok)throw new Error('fetch failed');
+    if(!res.ok)throw new Error('HTTP '+res.status);
     const data=await res.json();
-    const raw=Array.isArray(data)?data:(data.apps||data.games||Object.values(data)[0]||[]);
-    websiteApps=raw.map(a=>({
-      name:a.name||'Unknown',
-      url:a.url||null,
-      urls:Array.isArray(a.urls)?a.urls:null,
-      hasMultipleUrls:Array.isArray(a.urls)&&a.urls.length>1,
-      icon:a.icon||a.image||a.img||null,
-      category:'website',
-      isDefault:true
-    }));
+    const raw=Array.isArray(data)?data:[];
+    websiteApps=raw.map(a=>{
+      const hasUrls=Array.isArray(a.urls)&&a.urls.length>0;
+      return {
+        name:a.name||'Unknown',
+        url:hasUrls?null:(a.url||null),
+        urls:hasUrls?a.urls:null,
+        hasMultipleUrls:hasUrls&&a.urls.length>1,
+        icon:a.icon||null,
+        category:'website',
+        isDefault:true
+      };
+    });
   }catch(err){
     websiteApps=[];
-    if(grid)grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:52px;color:var(--txt-d);font-size:0.78rem;font-family:\'JetBrains Mono\',monospace;letter-spacing:0.1em;">Failed to load games</div>';
+    if(grid)grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:52px;color:var(--txt-d);font-size:0.78rem;font-family:\'JetBrains Mono\',monospace;letter-spacing:0.1em;">Failed to load — check your connection</div>';
     showToast('Failed to load games');
   }
   filterWebsites();
@@ -921,7 +959,9 @@ function renderGrid(id,apps,query){
     const card=e.target.closest('.app-card');
     if(!card||e.target.classList.contains('app-del'))return;
     if(card.dataset.multi==='1'){
-      showServerSelector(card.dataset.name,JSON.parse(card.dataset.urls),card.dataset.icon);
+      const urls=JSON.parse(card.dataset.urls);
+      if(urls.length===1){document.getElementById('urlWebsites').value=urls[0];launchWebsite(card.dataset.name,card.dataset.icon);}
+      else showServerSelector(card.dataset.name,urls,card.dataset.icon);
     }else{
       const url=card.dataset.url;
       if(url){document.getElementById('urlWebsites').value=url;launchWebsite(card.dataset.name,card.dataset.icon);}

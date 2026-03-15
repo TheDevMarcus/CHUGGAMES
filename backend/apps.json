@@ -19,20 +19,12 @@
   },
   {
     "name": "Truffled",
-    "urls": [
-      "https://peoreftetetjhgh12k3jg.arzamascev.ru",
-      "https://securlyworkpleaseworkbroplease.lol",
-      "https://newyork-newspaperprinter.socialistsushi.com",
-      "https://trampoline-scienceactivity.mushkoorfoods.co.uk"
-    ],
+    "url": "https://peoreftetetjhgh12k3jg.arzamascev.ru",
     "icon": "https://raw.githubusercontent.com/TheDevMarcus/NOVA/refs/heads/main/main/backend/images/Truffled.png"
   },
   {
     "name": "Rosin",
-    "urls": [
-      "https://hiii.acmys.cl",
-      "https://analytics.echofx.com/"
-    ],
+    "url": "https://hiii.acmys.cl",
     "icon": "https://raw.githubusercontent.com/TheDevMarcus/NOVA/refs/heads/main/main/backend/images/ROSIN.png"
   },
   {
@@ -55,5 +47,15 @@
     "name": "Bloxcraft",
     "url": "https://bloxcraft-ubg.bavish9772.workers.dev/",
     "icon": "https://raw.githubusercontent.com/TheDevMarcus/NOVA/refs/heads/main/main/backend/images/bloxcraft.png"
+  },
+  {
+    "name": "DodgeUB",
+    "url": "https://cdn.jsdelivr.net/gh/dogeub/-/index.svg",
+    "icon": ""
+  },
+  {
+    "name": "Galaxy",
+    "url": "https://learningscience.b-cdn.net",
+    "icon": ""
   }
 ]

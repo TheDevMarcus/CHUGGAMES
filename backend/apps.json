@@ -2,9 +2,15 @@
   {
     "name": "1key",
     "urls": [
-      "https://key.vaultnoir.com/",
-      "https://jsu.js.org/",
-      "https://www.1key.abrdns.com/"
+      "https://1key.lol",
+      "https://edu.kb-photos.com/",
+      "https://edu.vaultnoir.com/",
+      "https://college.vaultnoir.com/",
+      "https://classroom.tozsugianto.com/",
+      "https://safety.tvjumbleanswers.com/",
+      "https://edu.tvjumbleanswers.com/",
+      "https://edu.rkimport.com/",
+      "https://college.rkimport.com/"
     ],
     "icon": "https://raw.githubusercontent.com/TheDevMarcus/NOVA/refs/heads/main/main/backend/images/1key.png"
   },

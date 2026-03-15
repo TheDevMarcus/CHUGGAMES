@@ -1,11 +1,7 @@
 [
   {
     "name": "55GMS",
-    "urls": [
-      "https://v2202412248092306146.luckysrv.de/",
-      "http://quiz.htrick.ar",
-      "https://math.nei.cl"
-    ],
+    "url": "https://v2202412248092306146.luckysrv.de/",
     "icon": "https://raw.githubusercontent.com/TheDevMarcus/NOVA/refs/heads/main/main/backend/images/55GMS.png"
   },
   {
@@ -28,22 +24,6 @@
     "icon": "https://raw.githubusercontent.com/TheDevMarcus/NOVA/refs/heads/main/main/backend/images/ROSIN.png"
   },
   {
-    "name": "DEMON",
-    "urls": [
-      "https://demon.learn-math.space",
-      "https://gullible.online/"
-    ],
-    "icon": "https://raw.githubusercontent.com/TheDevMarcus/NOVA/refs/heads/main/main/backend/images/demon.png"
-  },
-  {
-    "name": "Cherri",
-    "urls": [
-      "https://school.learning.misem.or.id/",
-      "https://studyingtime.fun.debahamondesaviana.cl/"
-    ],
-    "icon": "https://raw.githubusercontent.com/TheDevMarcus/NOVA/refs/heads/main/main/backend/images/cherri.png"
-  },
-  {
     "name": "Bloxcraft",
     "url": "https://bloxcraft-ubg.bavish9772.workers.dev/",
     "icon": "https://raw.githubusercontent.com/TheDevMarcus/NOVA/refs/heads/main/main/backend/images/bloxcraft.png"
@@ -51,11 +31,11 @@
   {
     "name": "DodgeUB",
     "url": "https://cdn.jsdelivr.net/gh/dogeub/-/index.svg",
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/TheDevMarcus/CHUGGAMES/refs/heads/main/backend/images/dogeub.png"
   },
   {
     "name": "Galaxy",
     "url": "https://learningscience.b-cdn.net",
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/TheDevMarcus/CHUGGAMES/refs/heads/main/backend/images/galaxy.png"
   }
 ]

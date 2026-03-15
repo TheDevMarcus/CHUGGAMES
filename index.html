@@ -168,6 +168,7 @@ body.topbar-mode .main-wrapper{padding-top:calc(var(--topbar-h)+26px);}
 @keyframes tabIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 
 .home-grid{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;gap:36px;text-align:center;padding:40px 20px;}
+.hero-wrap{display:flex;flex-direction:column;align-items:center;width:100%;gap:0;}
 
 .wordmark{
   font-family:'Syncopate',sans-serif;
@@ -179,10 +180,12 @@ body.topbar-mode .main-wrapper{padding-top:calc(var(--topbar-h)+26px);}
 }
 .tagline{
   margin-top:14px;font-size:0.92rem;color:var(--txt-d);font-weight:400;
-  display:flex;align-items:center;justify-content:center;gap:5px;min-height:1.55rem;
+  display:flex;align-items:center;justify-content:center;gap:5px;
+  height:2.4rem;min-height:2.4rem;
   cursor:pointer;border-radius:8px;padding:6px 14px;
   transition:background 0.2s,color 0.2s;
   border:1px solid transparent;
+  width:100%;max-width:600px;
 }
 .tagline:hover{background:var(--p-dim);color:var(--txt-s);border-color:var(--border);}
 .tagline-hint{font-size:0.58rem;color:var(--txt-d);letter-spacing:0.14em;font-family:'JetBrains Mono',monospace;opacity:0.5;margin-top:4px;}
@@ -534,14 +537,14 @@ input:checked+.toggle-slider::before{transform:translateX(22px);}
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings
     </div>
   </div>
-  <div class="tb-right"><div class="v-badge"><div class="v-dot"></div>V1.0</div></div>
+  <div class="tb-right"><div class="v-badge"><div class="v-dot"></div><span class="v-ver">V1.4</span></div></div>
 </nav>
 
 <div class="layout">
   <aside class="sidebar">
     <div class="sb-logo">
       <div class="logo-wordmark">CHUG</div>
-      <div class="v-badge"><div class="v-dot"></div>Version 1.0</div>
+      <div class="v-badge"><div class="v-dot"></div>V<span class="v-ver">1.4</span></div>
     </div>
     <nav class="sb-nav">
       <div class="nav-item active" id="snav-home" onclick="switchTab('home')">
@@ -576,7 +579,7 @@ input:checked+.toggle-slider::before{transform:translateX(22px);}
 
     <div id="home-content" class="tab-content active">
       <div class="home-grid">
-        <div>
+        <div class="hero-wrap">
           <div class="wordmark">
             <span class="wm-letter" data-tip="Chip">C</span><span class="wm-letter" data-tip="Hill">H</span><span class="wm-letter" data-tip="Unblocked">U</span><span class="wm-letter" data-tip="Games">G</span>
           </div>
@@ -587,10 +590,10 @@ input:checked+.toggle-slider::before{transform:translateX(22px);}
         </div>
         <div class="stats-row">
           <div class="stat-card"><div class="stat-num" id="statSites">0</div><div class="stat-label">Websites</div></div>
-          <div class="stat-card"><div class="stat-num">1.0</div><div class="stat-label">Version</div></div>
+          <div class="stat-card"><div class="stat-num" id="statVer">1.4</div><div class="stat-label">Version</div></div>
         </div>
       </div>
-      <div class="footer"><span>CHUG — V1.0</span><span style="opacity:0.3">© 2025</span></div>
+      <div class="footer"><span class="footer-ver">CHUG — V1.4</span><span style="opacity:0.3">© 2025</span></div>
     </div>
 
     <div id="changelog-content" class="tab-content">
@@ -600,7 +603,7 @@ input:checked+.toggle-slider::before{transform:translateX(22px);}
       <div class="changelog-content-wrap">
         <div class="changelog-full" id="changelogFull"></div>
       </div>
-      <div class="footer"><span>CHUG — V1.0</span><span style="opacity:0.3">© 2025</span></div>
+      <div class="footer"><span class="footer-ver">CHUG — V1.4</span><span style="opacity:0.3">© 2025</span></div>
     </div>
 
     <div id="websites-content" class="tab-content">
@@ -619,7 +622,7 @@ input:checked+.toggle-slider::before{transform:translateX(22px);}
         <input id="urlWebsites" placeholder="Paste a URL to launch..." autocomplete="off" onkeydown="if(event.key==='Enter')launchWebsite()">
         <button class="launch-btn" onclick="launchWebsite()">Launch</button>
       </div>
-      <div class="footer"><span>CHUG — V1.0</span><span style="opacity:0.3">© 2025</span></div>
+      <div class="footer"><span class="footer-ver">CHUG — V1.4</span><span style="opacity:0.3">© 2025</span></div>
     </div>
 
     <div id="settings-content" class="tab-content">
@@ -640,7 +643,7 @@ input:checked+.toggle-slider::before{transform:translateX(22px);}
             <div class="s-block">
               <div class="s-row">
                 <div><div class="s-block-title">System Status</div><div class="s-sub">All services operational</div></div>
-                <div class="v-badge"><div class="v-dot"></div>V1.0</div>
+                <div class="v-badge"><div class="v-dot"></div>V<span class="v-ver">1.4</span></div>
               </div>
             </div>
             <button class="s-btn danger" onclick="resetToDefaults()" style="width:100%;justify-content:center;"><i class="fas fa-undo"></i> Reset to Defaults</button>
@@ -724,7 +727,7 @@ input:checked+.toggle-slider::before{transform:translateX(22px);}
 
         </div>
       </div>
-      <div class="footer" style="margin-top:20px;"><span>CHUG — V1.0</span><span style="opacity:0.3">© 2025</span></div>
+      <div class="footer" style="margin-top:20px;"><span class="footer-ver">CHUG — V1.4</span><span style="opacity:0.3">© 2025</span></div>
     </div>
 
   </div>
@@ -761,9 +764,12 @@ input:checked+.toggle-slider::before{transform:translateX(22px);}
 
 <script id="quotesData" type="application/json">
 [
+  "Did you know that this website was made by Chip Hill? Also The Founder Of Hillflow Brand 😎.",
   "Tiktok has almost been banned 3 times 😭.",
   "Remember Kids Youtube Shorts Is Brain Rot ❌.",
-  "Did you Know CHUG Means Chip Hill's Unblocked Games 🎮?",
+  "Did you Know CHUG Means Chips Unblocked Games 🎮?",
+  "Minecraft On CHUG Was originally a easter egg 🥚.",
+  "Skibidi toilet, skibidi, skibidi toilet. Skibidi toilet, skibidi, skibidi toilet 🚽.",
   "CHUG WAS A PASSION PROJECT AT FIRST 💻.",
   "CHUG is used world wide 🌍.",
   "We Update Every Week 🎉!",
@@ -789,6 +795,7 @@ input:checked+.toggle-slider::before{transform:translateX(22px);}
 </script>
 
 <script>
+const VERSION='1.4';
 let websiteApps=[],userApps=[],rotationInterval=null;
 let pCurrentLib='dayton_classic',performanceMode=false,currentParticleColor='#38b6ff',pTime=0;
 let quotes=[];
@@ -1170,6 +1177,9 @@ function renderLogs(logs){
     .then(r=>{if(!r.ok)throw new Error();return r.json();})
     .then(data=>{const logs=Array.isArray(data)?data:(data.logs||data.updates||data.changelog||[]);renderLogs(logs.length?logs:[]);})
     .catch(()=>renderLogs([]));
+  document.querySelectorAll('.v-ver').forEach(el=>el.textContent=VERSION);
+  const sv=document.getElementById('statVer');if(sv)sv.textContent=VERSION;
+  document.querySelectorAll('.footer-ver').forEach(el=>el.textContent='CHUG — V'+VERSION);
   qIdx=Math.floor(Math.random()*quotes.length);
   typeWriter();
 })();

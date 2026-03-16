@@ -467,7 +467,7 @@ body[data-theme="rainbow"] .chat-msg.own .chat-bubble{background:linear-gradient
 .chat-system-msg{text-align:center;font-size:0.58rem;color:var(--txt-d);font-family:'JetBrains Mono',monospace;letter-spacing:0.1em;padding:4px 14px;background:rgba(255,255,255,0.02);border-radius:20px;display:inline-flex;align-self:center;border:1px solid var(--border);}
 body[data-theme="rainbow"] .chat-system-msg{background:linear-gradient(90deg,rgba(255,107,107,0.05),rgba(107,203,119,0.05),rgba(199,125,255,0.05));border-image:linear-gradient(90deg,rgba(255,107,107,0.2),rgba(199,125,255,0.2)) 1;}
 .chat-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--txt-d);font-size:0.72rem;font-family:'JetBrains Mono',monospace;letter-spacing:0.1em;padding:40px;}
-.chat-empty-icon{font-size:2.4rem;opacity:0.3;}
+.chat-empty-icon{font-size:2.2rem;opacity:0.25;}
 .chat-input-wrap{padding:12px 18px 16px;border-top:1px solid var(--border);flex-shrink:0;background:var(--sb);}
 body[data-theme="rainbow"] .chat-input-wrap{background:rgba(5,3,10,0.98);border-top:1px solid transparent;border-image:linear-gradient(90deg,rgba(255,107,107,0.15),rgba(199,125,255,0.15)) 1;}
 .chat-input-bar{display:flex;gap:10px;align-items:center;background:var(--glass);border:1px solid var(--border);border-radius:14px;padding:7px 7px 7px 16px;transition:all 0.24s;backdrop-filter:blur(18px);}
@@ -657,6 +657,46 @@ body[data-theme="rainbow"] .toast{background:linear-gradient(90deg,#ff6b6b,#ffd9
 }
 @media(min-width:769px){.topbar{display:none;}body.topbar-mode .topbar{display:flex;}}
 
+/* ====== HOME FOOTER ====== */
+.home-footer{padding:22px 32px 20px;border-top:1px solid var(--border);margin-top:auto;flex-shrink:0;}
+body[data-theme="rainbow"] .home-footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,rgba(255,107,107,0.2),rgba(107,203,119,0.2),rgba(199,125,255,0.2)) 1;}
+.hf-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+.hf-brand{display:flex;flex-direction:column;gap:4px;}
+.hf-logo{font-family:'Syncopate',sans-serif;font-size:1rem;font-weight:700;letter-spacing:0.32em;background:linear-gradient(135deg,#fff 0%,var(--p) 50%,var(--acc) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 12px var(--p-glow));display:inline-block;width:fit-content;}
+body[data-theme="rainbow"] .hf-logo{background:linear-gradient(90deg,#ff6b6b,#ffd93d,#6bcb77,#4d96ff,#c77dff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:rainbowShift 3s linear infinite;background-size:200% 100%;}
+.hf-tagline{font-size:0.62rem;color:var(--txt-d);letter-spacing:0.06em;}
+.hf-center{display:flex;align-items:center;gap:10px;}
+.hf-links-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:11px;background:var(--p-dim);border:1px solid var(--border-h);color:var(--p);font-size:0.74rem;font-weight:700;cursor:pointer;transition:all 0.22s var(--ease);letter-spacing:0.06em;font-family:'Outfit',sans-serif;position:relative;}
+.hf-links-btn:hover{background:var(--p-dim2);transform:translateY(-2px);box-shadow:0 6px 20px var(--p-glow2);}
+body[data-theme="rainbow"] .hf-links-btn{background:linear-gradient(135deg,rgba(255,107,107,0.08),rgba(199,125,255,0.08));border-image:linear-gradient(135deg,rgba(255,107,107,0.3),rgba(199,125,255,0.3)) 1;color:#e0b8f0;}
+.hf-links-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;}
+.hf-links-btn-badge{background:var(--p);color:#000;font-size:0.5rem;font-weight:800;padding:1px 6px;border-radius:10px;font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;margin-left:2px;}
+body[data-theme="rainbow"] .hf-links-btn-badge{background:linear-gradient(90deg,#ff6b6b,#c77dff);color:#000;}
+.hf-copy{font-size:0.56rem;color:var(--txt-d);font-family:'JetBrains Mono',monospace;letter-spacing:0.1em;opacity:0.4;}
+
+/* Links popup */
+.hf-popup-overlay{position:fixed;inset:0;z-index:5000;display:none;align-items:flex-end;justify-content:center;padding:0 0 80px;}
+.hf-popup-overlay.show{display:flex;animation:fadeIn 0.15s ease both;}
+.hf-popup-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);cursor:pointer;}
+.hf-popup{position:relative;z-index:1;width:min(420px,94vw);background:rgba(2,10,20,0.99);border:1px solid var(--border-h);border-radius:22px;box-shadow:0 32px 80px rgba(0,0,0,0.9);animation:popUp 0.22s var(--ease) both;overflow:hidden;}
+@keyframes popUp{from{opacity:0;transform:translateY(24px) scale(0.96);}to{opacity:1;transform:translateY(0) scale(1);}}
+body[data-theme="rainbow"] .hf-popup{background:rgba(5,3,10,0.99);border-image:linear-gradient(135deg,rgba(255,107,107,0.3),rgba(199,125,255,0.3)) 1;}
+.hf-popup-head{padding:18px 20px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.hf-popup-title{font-family:'Syncopate',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.22em;color:var(--txt);text-transform:uppercase;}
+body[data-theme="rainbow"] .hf-popup-title{background:linear-gradient(90deg,#ff6b6b,#4d96ff,#c77dff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hf-popup-close{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,0.04);border:none;color:var(--txt-d);cursor:pointer;transition:all 0.15s;display:flex;align-items:center;justify-content:center;font-size:12px;}
+.hf-popup-close:hover{background:rgba(255,255,255,0.1);color:var(--p);transform:rotate(90deg);}
+.hf-popup-list{max-height:340px;overflow-y:auto;padding:10px;}
+.hf-popup-item{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:13px;cursor:pointer;transition:all 0.18s var(--ease);border:1px solid transparent;text-decoration:none;}
+.hf-popup-item:hover{background:var(--p-dim);border-color:var(--border);}
+body[data-theme="rainbow"] .hf-popup-item:hover{background:linear-gradient(135deg,rgba(255,107,107,0.07),rgba(199,125,255,0.07));border-image:linear-gradient(135deg,rgba(255,107,107,0.2),rgba(199,125,255,0.2)) 1;}
+.hf-popup-fa-icon{font-size:0.88rem;color:var(--p);flex-shrink:0;width:18px;text-align:center;opacity:0.8;}
+.hf-popup-num{font-family:'Syncopate',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.14em;color:var(--txt);flex:1;}
+body[data-theme="rainbow"] .hf-popup-num{background:linear-gradient(90deg,#ff6b6b,#4d96ff,#c77dff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hf-popup-icon{font-size:1.5rem;flex-shrink:0;}
+.hf-popup-arrow{color:var(--txt-d);font-size:0.9rem;flex-shrink:0;transition:all 0.18s;}
+.hf-popup-item:hover .hf-popup-arrow{transform:translateX(4px);color:var(--p);}
+
 /* ====== ADMIN PANEL ====== */
 #adminPanel{position:fixed;z-index:9000;width:340px;background:rgba(1,6,14,0.99);border:1px solid rgba(244,63,94,0.4);border-radius:18px;box-shadow:0 32px 80px rgba(0,0,0,0.95),0 0 0 1px rgba(244,63,94,0.1);display:none;flex-direction:column;overflow:hidden;backdrop-filter:blur(40px);animation:adminIn 0.22s var(--ease) both;}
 #adminPanel.show{display:flex;}
@@ -795,9 +835,26 @@ body[data-theme="rainbow"] .toast{background:linear-gradient(90deg,#ff6b6b,#ffd9
             <div class="stat-num" id="statVer">1.6</div>
             <div class="stat-label">Version</div>
           </div>
+          <div class="stat-card" onclick="openLinksPopup()" style="cursor:pointer;" title="Our Links">
+            <div class="stat-card-icon"><i class="fas fa-link"></i></div>
+            <div class="stat-num" id="statLinks">2</div>
+            <div class="stat-label">Our Links</div>
+          </div>
         </div>
       </div>
       <div class="footer"><span class="footer-ver">CHUG — V1.6</span><span style="opacity:0.3">© 2025</span></div>
+    </div>
+
+    <!-- LINKS POPUP (global) -->
+    <div class="hf-popup-overlay" id="linksPopupOverlay">
+      <div class="hf-popup-backdrop" onclick="closeLinksPopup()"></div>
+      <div class="hf-popup">
+        <div class="hf-popup-head">
+          <div class="hf-popup-title">Our Links</div>
+          <button class="hf-popup-close" onclick="closeLinksPopup()">✕</button>
+        </div>
+        <div class="hf-popup-list" id="linksPopupList"></div>
+      </div>
     </div>
 
     <!-- CHANGELOG -->
@@ -852,7 +909,7 @@ body[data-theme="rainbow"] .toast{background:linear-gradient(90deg,#ff6b6b,#ffd9
 
         <div id="chatNameScreen" class="chat-name-screen">
           <div class="chat-name-card">
-            <div class="chat-name-avatar-preview" id="joinAvatarPreview"><span id="joinAvatarInitial">💬</span></div>
+            <div class="chat-name-avatar-preview" id="joinAvatarPreview"><span id="joinAvatarInitial"><i class="far fa-user" style="font-size:1.4rem;color:var(--txt-d);opacity:0.5;"></i></span></div>
             <div class="chat-name-title" id="joinCardTitle">Welcome Back</div>
             <div class="chat-name-sub" id="joinCardSub">Sign in with your username and password, or create a new account.</div>
 
@@ -889,7 +946,7 @@ body[data-theme="rainbow"] .toast{background:linear-gradient(90deg,#ff6b6b,#ffd9
           <div class="chat-main">
             <div class="chat-room-wrap">
               <div class="chat-messages" id="chatMessages">
-                <div class="chat-empty"><div class="chat-empty-icon">🌊</div><span>No messages yet — say hello!</span></div>
+                <div class="chat-empty"><div class="chat-empty-icon"><i class="far fa-comment-dots"></i></div><span>No messages yet — say hello!</span></div>
               </div>
             </div>
             <div class="chat-input-wrap">
@@ -1212,29 +1269,36 @@ body[data-theme="rainbow"] .toast{background:linear-gradient(90deg,#ff6b6b,#ffd9
   </div>
 </div>
 
+<script id="footerLinksData" type="application/json">
+[
+  { "url": "https://newchatupdate.vercel.app/" },
+  { "url": "https://nonewfunnymemes.web.app" }
+]
+</script>
+
 <script id="quotesData" type="application/json">
 [
-  "Tiktok has almost been banned 3 times 😭.",
-  "Did you Know CHUG Means Chips Unblocked Games 🎮?",
-  "We Update Every Week 🎉!",
-  "Minecraft is good for the environment ⛏.",
-  "My code works and I have no idea why 🤷.",
-  "I told my computer I needed a break and now it won't stop sending me Kit Kat ads 🍫.",
-  "A day without gaming is a day wasted 🎮.",
-  "I put the 'fun' in 'function' and the 'error' in 'terror' 💀.",
-  "My WiFi password is the most powerful secret I keep 📶.",
-  "Ctrl + Z is the most important life skill 🔄.",
-  "Fortnite Is Just A Rip Off Of 1v1.lolヽ((◎д◎))ゝ.",
-  "I asked my teacher if I could go to the bathroom. She said finish your work first. I am still here 🚽.",
-  "Ctrl + Alt + Delete: the three stages of my workday 🔄.",
-  "In a world full of updates, be the bug fixer 🐞.",
-  "Sleep is for the weak, coffee is for the strong ☕️💪.",
-  "In the game of love, sometimes you respawn alone 💔🎮.",
-  "Drain Out the Bad Energy 💔.",
-  "In this world where you can be anything be yourself 😇.",
-  "Life Is Like Fortnite Some Land High Ground Some have to build to it 🫶.",
-  "My brain has too many tabs open and one of them is playing music but I can't find it 🎵.",
-  "Have you ever been so bored you started reading random facts on the internet 🌐."
+  "Tiktok has almost been banned 3 times.",
+  "Did you Know CHUG Means Chips Unblocked Games?",
+  "We Update Every Week!",
+  "Minecraft is good for the environment.",
+  "My code works and I have no idea why.",
+  "I told my computer I needed a break and now it won't stop sending me Kit Kat ads.",
+  "A day without gaming is a day wasted.",
+  "I put the fun in function and the error in terror.",
+  "My WiFi password is the most powerful secret I keep.",
+  "Ctrl + Z is the most important life skill.",
+  "Fortnite Is Just A Rip Off Of 1v1.lol.",
+  "I asked my teacher if I could go to the bathroom. She said finish your work first. I am still here.",
+  "Ctrl + Alt + Delete: the three stages of my workday.",
+  "In a world full of updates, be the bug fixer.",
+  "Sleep is for the weak, coffee is for the strong.",
+  "In the game of love, sometimes you respawn alone.",
+  "Drain Out the Bad Energy.",
+  "In this world where you can be anything be yourself.",
+  "Life Is Like Fortnite — Some Land High Ground, Some Have To Build To It.",
+  "My brain has too many tabs open and one of them is playing music but I can't find it.",
+  "Have you ever been so bored you started reading random facts on the internet?"
 ]
 </script>
 
@@ -1370,7 +1434,6 @@ async function enterChatRoom(username, userData, announceJoin) {
 
   onlineCheckInterval = setInterval(updateOnlineCount, 30000);
   updateOnlineCount();
-  startFactsInterval();
 
   const q = query(collection(db, 'chug_messages'), orderBy('ts', 'asc'), limit(120));
   chatUnsubscribe = onSnapshot(q, snap => {
@@ -1382,7 +1445,7 @@ async function enterChatRoom(username, userData, announceJoin) {
   if (announceJoin && (isFirstTime || wasGoneForAWhile)) {
     await addDoc(collection(db, 'chug_messages'), {
       type: 'system',
-      text: `${chatUser.displayName} joined the room 👋`,
+      text: `${chatUser.displayName} joined the room`,
       ts: serverTimestamp()
     });
   }
@@ -1420,7 +1483,7 @@ function resetLoginForm() {
   if (dispEl) dispEl.value = '';
   const avatarEl = document.getElementById('chatAvatarInput');
   if (avatarEl) avatarEl.value = '';
-  document.getElementById('joinAvatarInitial').innerHTML = '💬';
+  document.getElementById('joinAvatarInitial').innerHTML = '<i class="far fa-user" style="font-size:1.4rem;color:var(--txt-d);opacity:0.5;"></i>';
   hideJoinError();
 }
 
@@ -1480,7 +1543,7 @@ window.updateJoinPreview = function() {
     const color = getAvatarColor(name);
     initial.innerHTML = `<span style="color:${color};font-size:2rem;font-weight:700;">${getInitials(name)}</span>`;
   } else {
-    initial.innerHTML = '💬';
+    initial.innerHTML = '<i class="far fa-user" style="font-size:1.4rem;color:var(--txt-d);opacity:0.5;"></i>';
   }
 };
 
@@ -1578,13 +1641,12 @@ window.leaveChat = async function() {
   if (chatUnsubscribe) chatUnsubscribe();
   if (presenceInterval) clearInterval(presenceInterval);
   if (onlineCheckInterval) clearInterval(onlineCheckInterval);
-  stopFactsInterval();
   chatUser = null; hasMessages = false;
   document.getElementById('chatNameScreen').style.display = 'flex';
   document.getElementById('chatRoomWrap').style.display = 'none';
   document.getElementById('chatTopbar').style.display = 'none';
   document.getElementById('chatOnlineCount').textContent = '0 online';
-  document.getElementById('chatMessages').innerHTML = '<div class="chat-empty"><div class="chat-empty-icon">🌊</div><span>No messages yet — say hello!</span></div>';
+  document.getElementById('chatMessages').innerHTML = '<div class="chat-empty"><div class="chat-empty-icon"><i class="far fa-comment-dots"></i></div><span>No messages yet — say hello!</span></div>';
   document.getElementById('chatProfilePanel').classList.remove('open');
   document.getElementById('userProfileOverlay').classList.remove('show');
   resetLoginForm();
@@ -2066,73 +2128,6 @@ function refreshMessagesForUser(uid, newDisplayName, newColor, newAvatarUrl) {
   });
 }
 
-const RANDOM_FACTS = [
-  "🌊 The ocean produces over 50% of the world's oxygen.",
-  "🎮 Video games were first sold in the 1970s — Pong came out in 1972.",
-  "🧠 Your brain uses about 20% of your body's total energy.",
-  "🦈 Sharks are older than trees — they've existed for over 400 million years.",
-  "🍕 Americans eat approximately 3 billion pizzas per year.",
-  "🌙 The Moon is slowly drifting away from Earth — about 1.5 inches per year.",
-  "🐙 Octopuses have three hearts and blue blood.",
-  "⚡ Lightning strikes the Earth about 100 times every second.",
-  "🦋 A group of butterflies is called a kaleidoscope.",
-  "🧊 Hot water can freeze faster than cold water under certain conditions (the Mpemba effect).",
-  "🎵 Music can reduce anxiety by up to 65% according to researchers.",
-  "🐝 Honey never spoils — archaeologists found 3,000-year-old honey in Egyptian tombs that was still edible.",
-  "🌍 There are more trees on Earth than stars in the Milky Way.",
-  "🦆 Ducks' quacks don't echo, and nobody knows why.",
-  "🧲 A teaspoon of a neutron star would weigh about 10 million tons.",
-  "🐬 Dolphins sleep with one eye open.",
-  "🍌 Bananas are slightly radioactive due to their potassium content.",
-  "🕷️ Spiders can't digest solid food — they liquefy their prey first.",
-  "🎲 The most common number rolled on a dice is 7 (with two dice).",
-  "🐘 Elephants are the only animals that can't jump.",
-  "🌈 A rainbow is actually a full circle — you just can't see the bottom half from the ground.",
-  "🧬 Humans share about 60% of their DNA with bananas.",
-  "🦅 Eagles can spot prey from up to 2 miles away.",
-  "🌺 There are over 400,000 species of flowering plants on Earth.",
-  "🎯 The dot over the letter 'i' is called a tittle.",
-  "🐠 Clownfish can change their gender — all are born male.",
-  "🌋 There are more volcanoes under the ocean than on land.",
-  "🏆 The Olympics were originally only open to amateur athletes, not professionals.",
-  "🧪 There are more possible iterations of a game of chess than atoms in the observable universe.",
-  "🐧 Penguins propose to their mates with pebbles.",
-  "🎪 The first YouTube video was uploaded on April 23, 2005.",
-  "🦁 A lion's roar can be heard from 5 miles away.",
-  "🍫 It takes about 400 cocoa beans to make one pound of chocolate.",
-  "🌊 The Pacific Ocean is larger than all of Earth's landmasses combined.",
-  "🕰️ The shortest war in history lasted only 38 to 45 minutes.",
-  "🐋 Blue whales' hearts are so big that a human could crawl through the arteries.",
-  "🎸 Guitar strings were originally made from sheep intestines.",
-  "🦎 Geckos can walk on ceilings because of millions of tiny hair-like structures on their feet.",
-  "🍎 Apples float in water because they're 25% air.",
-  "🌌 There are more stars in the universe than grains of sand on all of Earth's beaches."
-];
-
-let factsInterval = null;
-let lastFactIndex = -1;
-
-function startFactsInterval() {
-  if (factsInterval) clearInterval(factsInterval);
-  factsInterval = setInterval(async () => {
-    if (!chatUser) return;
-    try {
-      let idx;
-      do { idx = Math.floor(Math.random() * RANDOM_FACTS.length); } while (idx === lastFactIndex);
-      lastFactIndex = idx;
-      await addDoc(collection(db, 'chug_messages'), {
-        type: 'system',
-        text: '💡 Did you know? ' + RANDOM_FACTS[idx],
-        ts: serverTimestamp()
-      });
-    } catch(e) {}
-  }, 5 * 60 * 1000);
-}
-
-function stopFactsInterval() {
-  if (factsInterval) { clearInterval(factsInterval); factsInterval = null; }
-}
-
 window.addEventListener('beforeunload', async () => {
   if (chatUser) {
     try { await updateDoc(doc(db, 'chug_users', chatUser.username), { online: false }); } catch(e) {}
@@ -2374,7 +2369,7 @@ function filterWebsites(){
 function renderGrid(id,apps,query){
   const cont=document.getElementById(id);if(!cont)return;
   let html='';
-  if(!query){const icons=apps.map(a=>a.icon).filter(Boolean).sort(()=>Math.random()-0.5);html+=`<div class="random-card" onclick="launchRandom()"><div class="random-badge">🎲 RANDOM</div><div class="random-icon-cont" id="randIconCont">${icons.map((ic,i)=>`<img src="${ic}" class="${i===0?'active':''}" onerror="this.style.display='none'" loading="lazy">`).join('')}</div><div class="app-name">Surprise Me</div></div>`;}
+  if(!query){const icons=apps.map(a=>a.icon).filter(Boolean).sort(()=>Math.random()-0.5);html+=`<div class="random-card" onclick="launchRandom()"><div class="random-badge"><i class="fas fa-random"></i> RANDOM</div><div class="random-icon-cont" id="randIconCont">${icons.map((ic,i)=>`<img src="${ic}" class="${i===0?'active':''}" onerror="this.style.display='none'" loading="lazy">`).join('')}</div><div class="app-name">Surprise Me</div></div>`;}
   if(!apps.length){html+=`<div style="grid-column:1/-1;text-align:center;padding:52px;color:var(--txt-d);font-size:0.78rem;font-family:'JetBrains Mono',monospace;letter-spacing:0.1em;">No websites found</div>`;}
   else{for(const a of apps){const hm=a.hasMultipleUrls&&a.urls;const fb=`https://ui-avatars.com/api/?background=020e18&color=fff&size=80&name=${encodeURIComponent(a.name.charAt(0))}`;const ud=hm?JSON.stringify(a.urls).replace(/'/g,'&apos;'):'';const del=!a.isDefault?`<div class="app-del" onclick="event.stopPropagation();deleteApp('${a.url||''}')">✕</div>`:'';html+=`<div class="app-card" data-multi="${hm?'1':'0'}" ${hm?`data-urls='${ud}'`:`data-url="${a.url||''}"`} data-name="${a.name}" data-icon="${a.icon||''}"><div class="app-icon"><img src="${a.icon||''}" onerror="this.src='${fb}'" loading="lazy"></div><div class="app-name">${a.name}${hm?' ('+a.urls.length+')':''}</div>${del}</div>`;}}
   if(!query)html+=`<div class="add-card" onclick="openAddModal()"><div class="add-icon-wrap">+</div><div class="add-label">Add Site</div></div>`;
@@ -2460,6 +2455,32 @@ function resetToDefaults(){
 }
 
 let qIdx=0,cIdx=0,deleting=false,twTimer=null;
+
+window.openLinksPopup = function() {
+  const overlay = document.getElementById('linksPopupOverlay');
+  const list = document.getElementById('linksPopupList');
+  const links = window._chugLinks || [];
+  list.innerHTML = links.length ? links.map((link, i) => {
+    const num = String(i + 1).padStart(1, '0');
+    const safeUrl = (link.url || '').replace(/"/g,'&quot;');
+    const safeName = (link.name || 'Link').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    const shortUrl = (link.url || '').replace(/^https?:\/\//,'').replace(/\/$/,'');
+    return `<a class="hf-popup-item" href="${safeUrl}" target="_blank" rel="noopener noreferrer">
+      <div class="hf-popup-num">LINK ${num}</div>
+      <div class="hf-popup-icon">${link.icon || '🔗'}</div>
+      <div class="hf-popup-info">
+        <div class="hf-popup-name">${safeName}</div>
+        <div class="hf-popup-url">${shortUrl}</div>
+      </div>
+      <div class="hf-popup-arrow">→</div>
+    </a>`;
+  }).join('') : '<div style="padding:24px;text-align:center;color:var(--txt-d);font-size:0.72rem;font-family:JetBrains Mono,monospace;letter-spacing:0.1em;">No links yet</div>';
+  overlay.classList.add('show');
+};
+
+window.closeLinksPopup = function() {
+  document.getElementById('linksPopupOverlay').classList.remove('show');
+};
 function randQuoteIdx(){if(quotes.length<=1)return 0;let next;do{next=Math.floor(Math.random()*quotes.length);}while(next===qIdx);return next;}
 function typeWriter(){
   const el=document.getElementById('typewriterText');if(!el)return;
@@ -2503,6 +2524,15 @@ function renderLogs(logs){
   document.querySelectorAll('.footer-ver').forEach(el=>el.textContent='CHUG — V'+VERSION);
   qIdx=Math.floor(Math.random()*quotes.length);
   typeWriter();
+
+  try {
+    const linksData = JSON.parse(document.getElementById('footerLinksData').textContent);
+    window._chugLinks = Array.isArray(linksData) ? linksData : [];
+    const badge = document.getElementById('linksBadge');
+    if (badge) badge.textContent = window._chugLinks.length;
+    const statLinks = document.getElementById('statLinks');
+    if (statLinks) statLinks.textContent = window._chugLinks.length;
+  } catch(e) { window._chugLinks = []; }
 })();
 </script>
 </body>

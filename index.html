@@ -219,34 +219,56 @@ body[data-theme="rainbow"] .status-text{
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
 }
 
-/* rainbow topbar */
-.topbar{position:fixed;top:0;left:0;right:0;height:var(--topbar-h);background:rgba(1,8,16,0.96);backdrop-filter:blur(32px);border-bottom:1px solid var(--border);z-index:200;display:none;align-items:center;padding:0 20px;gap:4px;}
+/* topbar */
+.topbar{
+  position:fixed;top:0;left:0;right:0;height:var(--topbar-h);
+  background:rgba(1,8,16,0.97);backdrop-filter:blur(32px);
+  border-bottom:1px solid var(--border);z-index:200;display:none;
+  align-items:center;justify-content:space-between;
+  padding:0 16px;gap:0;
+}
 body.topbar-mode .topbar{display:flex;}
 body.topbar-mode .sidebar{display:none;}
-body.topbar-mode .main-wrapper{padding-top:calc(var(--topbar-h)+24px);}
+body.topbar-mode .main-wrapper{padding-top:var(--topbar-h);}
 body[data-theme="rainbow"] .topbar{
-  background:rgba(5,3,10,0.97);
+  background:rgba(5,3,10,0.98);
   border-bottom:2px solid transparent;
   border-image:linear-gradient(90deg,#ff6b6b,#ffd93d,#6bcb77,#4d96ff,#c77dff,#ff6b9d) 1;
 }
-.tb-logo{font-family:'Syncopate',sans-serif;font-size:1rem;font-weight:700;letter-spacing:0.3em;background:linear-gradient(135deg,#fff,var(--p));-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 8px var(--p-glow));margin-right:14px;}
+.tb-logo{
+  font-family:'Syncopate',sans-serif;font-size:0.88rem;font-weight:700;
+  letter-spacing:0.28em;
+  background:linear-gradient(135deg,#fff,var(--p));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 8px var(--p-glow));
+  flex-shrink:0;white-space:nowrap;min-width:60px;
+}
 body[data-theme="rainbow"] .tb-logo{
   background:linear-gradient(90deg,#ff6b6b,#ffd93d,#6bcb77,#4d96ff,#c77dff);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
   animation:rainbowShift 3s linear infinite;background-size:200% 100%;
 }
-.tb-nav{display:flex;gap:2px;flex:1;}
-.tb-item{display:flex;align-items:center;gap:7px;padding:7px 13px;border-radius:9px;color:var(--txt-d);cursor:pointer;transition:all 0.2s;font-size:0.79rem;font-weight:600;border:1px solid transparent;}
-.tb-item svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.9;}
+.tb-nav{
+  display:flex;gap:2px;
+  position:absolute;left:50%;transform:translateX(-50%);
+}
+.tb-item{
+  display:flex;align-items:center;gap:6px;
+  padding:6px 12px;border-radius:9px;
+  color:var(--txt-d);cursor:pointer;transition:all 0.2s;
+  font-size:0.76rem;font-weight:600;border:1px solid transparent;
+  white-space:nowrap;
+}
+.tb-item svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.9;flex-shrink:0;}
 .tb-item:hover{color:var(--txt-s);background:var(--p-dim);}
 .tb-item.active{color:var(--p);background:var(--p-dim2);border-color:var(--border-h);}
 body[data-theme="rainbow"] .tb-item.active{
   background:linear-gradient(135deg,rgba(255,107,107,0.12),rgba(199,125,255,0.12));
-  color:#fff;
-  border-color:transparent;
+  color:#fff;border-color:transparent;
   border-image:linear-gradient(135deg,rgba(255,107,107,0.4),rgba(199,125,255,0.4)) 1;
 }
-.tb-right{margin-left:auto;}
+.tb-label{display:inline;}
+.tb-right{flex-shrink:0;min-width:60px;display:flex;justify-content:flex-end;}
 
 .main-wrapper{flex:1;overflow-x:hidden;display:flex;flex-direction:column;height:100vh;overflow-y:auto;}.main-wrapper>#chat-content{padding:0;overflow:hidden;height:100%;}
 .tab-content{display:none;flex:1;flex-direction:column;}.tab-content#chat-content{overflow:hidden;}
@@ -619,11 +641,19 @@ body[data-theme="rainbow"] .toast{background:linear-gradient(90deg,#ff6b6b,#ffd9
   .sidebar{display:none!important;}
   .topbar{display:flex!important;}
   body.topbar-mode .topbar{display:flex!important;}
-  .main-wrapper{padding-top:calc(var(--topbar-h)+16px)!important;padding-left:14px;padding-right:14px;}
+  .main-wrapper{padding-top:var(--topbar-h)!important;padding-left:14px;padding-right:14px;}
   .settings-wrap{flex-direction:column;}
   .settings-nav{width:100%;flex-direction:row;overflow-x:auto;flex-wrap:nowrap;}
   .s-nav-btn{flex-shrink:0;}
   .chat-messages{max-height:calc(100vh - 280px);}
+  .tb-label{display:none;}
+  .tb-item{padding:7px 10px;}
+  .tb-item svg{width:16px;height:16px;}
+}
+@media(max-width:380px){
+  .tb-logo{display:none;}
+  .tb-right{display:none;}
+  .tb-nav{position:static;transform:none;width:100%;justify-content:space-around;}
 }
 @media(min-width:769px){.topbar{display:none;}body.topbar-mode .topbar{display:flex;}}
 @media(max-width:480px){
@@ -644,19 +674,19 @@ body[data-theme="rainbow"] .toast{background:linear-gradient(90deg,#ff6b6b,#ffd9
   <span class="tb-logo">CHUG</span>
   <div class="tb-nav">
     <div class="tb-item active" id="tnav-home" onclick="switchTab('home')">
-      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span class="tb-label">Home</span>
     </div>
     <div class="tb-item" id="tnav-websites" onclick="switchTab('websites')">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Sites
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span class="tb-label">Sites</span>
     </div>
     <div class="tb-item" id="tnav-changelog" onclick="switchTab('changelog')">
-      <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Changelog
+      <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span class="tb-label">Changelog</span>
     </div>
     <div class="tb-item" id="tnav-chat" onclick="switchTab('chat')">
-      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Chat
+      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span class="tb-label">Chat</span>
     </div>
     <div class="tb-item" id="tnav-settings" onclick="switchTab('settings')">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span class="tb-label">Settings</span>
     </div>
   </div>
   <div class="tb-right"><div class="v-badge"><div class="v-dot"></div><span class="v-ver">V1.6</span></div></div>
@@ -1203,6 +1233,97 @@ async function hashPassword(pw) {
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
 }
 
+function setChatCookie(username, pwHash) {
+  const expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString();
+  document.cookie = `chug_u=${encodeURIComponent(username)};expires=${expires};path=/;SameSite=Lax`;
+  document.cookie = `chug_h=${encodeURIComponent(pwHash)};expires=${expires};path=/;SameSite=Lax`;
+}
+
+function clearChatCookie() {
+  document.cookie = 'chug_u=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+  document.cookie = 'chug_h=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+}
+
+function getChatCookie() {
+  const cookies = Object.fromEntries(document.cookie.split(';').map(c => {
+    const [k, ...v] = c.trim().split('=');
+    return [k, decodeURIComponent(v.join('='))];
+  }));
+  const u = cookies['chug_u'];
+  const h = cookies['chug_h'];
+  return (u && h) ? { username: u, pwHash: h } : null;
+}
+
+async function autoLoginFromCookie() {
+  const saved = getChatCookie();
+  if (!saved) return;
+  try {
+    const userDocRef = doc(db, 'chug_users', saved.username);
+    const snap = await getDoc(userDocRef);
+    if (!snap.exists()) { clearChatCookie(); return; }
+    const data = snap.data();
+    if (data.pwHash !== saved.pwHash) { clearChatCookie(); return; }
+    await enterChatRoom(saved.username, data, false);
+  } catch(e) {
+    clearChatCookie();
+  }
+}
+
+async function enterChatRoom(username, userData, announceJoin) {
+  const now = Date.now();
+  const lastSeenMs = userData.lastSeen?.toMillis ? userData.lastSeen.toMillis() : 0;
+  const wasGoneForAWhile = (now - lastSeenMs) > REJOIN_ANNOUNCE_MS;
+  const isFirstTime = userData.firstJoin !== false;
+
+  chatUser = {
+    username,
+    displayName: userData.displayName || username,
+    color: userData.color || getAvatarColor(username),
+    avatarUrl: userData.avatarUrl || null,
+    bannerUrl: userData.bannerUrl || null,
+    bio: userData.bio || '',
+    id: username,
+    usernameChangedOnce: userData.usernameChangedOnce || false,
+    lastSeen: userData.lastSeen || null,
+    firstJoin: userData.firstJoin !== false,
+    createdAt: userData.createdAt || null
+  };
+
+  await updateDoc(doc(db, 'chug_users', username), { lastSeen: serverTimestamp(), online: true, firstJoin: false });
+
+  document.getElementById('chatNameScreen').style.display = 'none';
+  document.getElementById('chatRoomWrap').style.display = 'flex';
+  document.getElementById('chatTopbar').style.display = 'flex';
+  document.getElementById('chatInput').focus();
+  updateTopbarAvatar();
+  refreshProfilePanel();
+
+  presenceInterval = setInterval(async () => {
+    if (chatUser) {
+      try { await updateDoc(doc(db, 'chug_users', chatUser.username), { lastSeen: serverTimestamp(), online: true }); } catch(e) {}
+    }
+  }, 60000);
+
+  onlineCheckInterval = setInterval(updateOnlineCount, 30000);
+  updateOnlineCount();
+  startFactsInterval();
+
+  const q = query(collection(db, 'chug_messages'), orderBy('ts', 'asc'), limit(120));
+  chatUnsubscribe = onSnapshot(q, snap => {
+    if (snap.empty && !hasMessages) return;
+    hasMessages = snap.size > 0;
+    renderMessages(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+  });
+
+  if (announceJoin && (isFirstTime || wasGoneForAWhile)) {
+    await addDoc(collection(db, 'chug_messages'), {
+      type: 'system',
+      text: `${chatUser.displayName} joined the room 👋`,
+      ts: serverTimestamp()
+    });
+  }
+}
+
 let chatUser = null;
 let chatUnsubscribe = null;
 let presenceInterval = null;
@@ -1358,58 +1479,8 @@ window.joinChat = async function() {
     const freshSnap = await getDoc(userDocRef);
     const userData = freshSnap.data();
 
-    chatUser = {
-      username,
-      displayName: userData.displayName || nameRaw,
-      color: userData.color || getAvatarColor(username),
-      avatarUrl: userData.avatarUrl || null,
-      bannerUrl: userData.bannerUrl || null,
-      bio: userData.bio || '',
-      id: username,
-      usernameChangedOnce: userData.usernameChangedOnce || false,
-      lastSeen: userData.lastSeen || null,
-      firstJoin: userData.firstJoin !== false,
-      createdAt: userData.createdAt || null
-    };
-
-    const now = Date.now();
-    const lastSeenMs = userData.lastSeen?.toMillis ? userData.lastSeen.toMillis() : 0;
-    const wasGoneForAWhile = (now - lastSeenMs) > REJOIN_ANNOUNCE_MS;
-    const isFirstTime = userData.firstJoin !== false;
-
-    await updateDoc(userDocRef, { lastSeen: serverTimestamp(), online: true, firstJoin: false });
-
-    document.getElementById('chatNameScreen').style.display = 'none';
-    document.getElementById('chatRoomWrap').style.display = 'flex';
-    document.getElementById('chatTopbar').style.display = 'flex';
-    document.getElementById('chatInput').focus();
-    updateTopbarAvatar();
-    refreshProfilePanel();
-
-    presenceInterval = setInterval(async () => {
-      if (chatUser) {
-        try { await updateDoc(doc(db, 'chug_users', chatUser.username), { lastSeen: serverTimestamp(), online: true }); } catch(e) {}
-      }
-    }, 60000);
-
-    onlineCheckInterval = setInterval(updateOnlineCount, 30000);
-    updateOnlineCount();
-    startFactsInterval();
-
-    const q = query(collection(db, 'chug_messages'), orderBy('ts', 'asc'), limit(120));
-    chatUnsubscribe = onSnapshot(q, snap => {
-      if (snap.empty && !hasMessages) return;
-      hasMessages = snap.size > 0;
-      renderMessages(snap.docs.map(d => ({ id: d.id, ...d.data() })));
-    });
-
-    if (isFirstTime || wasGoneForAWhile) {
-      await addDoc(collection(db, 'chug_messages'), {
-        type: 'system',
-        text: `${chatUser.displayName} joined the room 👋`,
-        ts: serverTimestamp()
-      });
-    }
+    setChatCookie(username, pwHash);
+    await enterChatRoom(username, userData, true);
 
   } catch(e) {
     console.error(e);
@@ -1433,6 +1504,7 @@ window.leaveChat = async function() {
   try {
     await updateDoc(doc(db, 'chug_users', chatUser.username), { online: false });
   } catch(e) {}
+  clearChatCookie();
   if (chatUnsubscribe) chatUnsubscribe();
   if (presenceInterval) clearInterval(presenceInterval);
   if (onlineCheckInterval) clearInterval(onlineCheckInterval);
@@ -1837,6 +1909,10 @@ window.addEventListener('beforeunload', async () => {
     try { await updateDoc(doc(db, 'chug_users', chatUser.username), { online: false }); } catch(e) {}
   }
 });
+
+setTimeout(async () => {
+  if (!chatUser) await autoLoginFromCookie();
+}, 500);
 </script>
 
 <script>
@@ -2030,7 +2106,10 @@ window.switchTab=function(tab){
   updateNavActive(tab);
   if(tab==='websites')filterWebsites();
   if(tab==='settings'){loadSettingsView();loadBetaUI();}
-  if(tab==='chat')setTimeout(()=>{const msgs=document.getElementById('chatMessages');if(msgs)msgs.scrollTop=msgs.scrollHeight;},100);
+  if(tab==='chat'){
+    setTimeout(()=>{const msgs=document.getElementById('chatMessages');if(msgs)msgs.scrollTop=msgs.scrollHeight;},100);
+    if(!chatUser && typeof autoLoginFromCookie==='function') autoLoginFromCookie();
+  }
 };
 function toggleNavMode(){const on=document.getElementById('topbarToggle').checked;localStorage.setItem('novaTopbar',on);document.body.classList.toggle('topbar-mode',on);}
 function switchSTab(id){

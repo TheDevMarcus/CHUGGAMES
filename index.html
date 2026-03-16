@@ -656,6 +656,49 @@ body[data-theme="rainbow"] .toast{background:linear-gradient(90deg,#ff6b6b,#ffd9
   .tb-nav{position:static;transform:none;width:100%;justify-content:space-around;}
 }
 @media(min-width:769px){.topbar{display:none;}body.topbar-mode .topbar{display:flex;}}
+
+/* ====== ADMIN PANEL ====== */
+#adminPanel{position:fixed;z-index:9000;width:340px;background:rgba(1,6,14,0.99);border:1px solid rgba(244,63,94,0.4);border-radius:18px;box-shadow:0 32px 80px rgba(0,0,0,0.95),0 0 0 1px rgba(244,63,94,0.1);display:none;flex-direction:column;overflow:hidden;backdrop-filter:blur(40px);animation:adminIn 0.22s var(--ease) both;}
+#adminPanel.show{display:flex;}
+@keyframes adminIn{from{opacity:0;transform:scale(0.94) translateY(10px);}to{opacity:1;transform:scale(1) translateY(0);}}
+.adm-head{padding:14px 16px 12px;background:linear-gradient(135deg,rgba(244,63,94,0.12),rgba(0,0,0,0));border-bottom:1px solid rgba(244,63,94,0.2);display:flex;align-items:center;justify-content:space-between;cursor:grab;user-select:none;flex-shrink:0;}
+.adm-head:active{cursor:grabbing;}
+.adm-title{font-family:'Syncopate',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.22em;color:#f43f5e;display:flex;align-items:center;gap:8px;text-transform:uppercase;}
+.adm-title-dot{width:6px;height:6px;border-radius:50%;background:#f43f5e;box-shadow:0 0 8px rgba(244,63,94,0.8);animation:vdot 2s ease-in-out infinite;}
+.adm-close-btn{width:24px;height:24px;border-radius:50%;background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.25);color:#f87171;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;transition:all 0.15s;}
+.adm-close-btn:hover{background:rgba(244,63,94,0.3);transform:rotate(90deg);}
+.adm-body{padding:14px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;max-height:70vh;}
+.adm-section{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:12px;overflow:hidden;}
+.adm-section-head{padding:9px 13px;font-size:0.55rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--txt-d);font-family:'JetBrains Mono',monospace;background:rgba(255,255,255,0.025);border-bottom:1px solid rgba(255,255,255,0.04);}
+.adm-user-list{display:flex;flex-direction:column;gap:0;max-height:200px;overflow-y:auto;}
+.adm-user-row{display:flex;align-items:center;gap:9px;padding:9px 13px;border-bottom:1px solid rgba(255,255,255,0.03);transition:background 0.15s;}
+.adm-user-row:last-child{border-bottom:none;}
+.adm-user-row:hover{background:rgba(255,255,255,0.03);}
+.adm-user-avatar{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;flex-shrink:0;overflow:hidden;}
+.adm-user-avatar img{width:100%;height:100%;object-fit:cover;}
+.adm-user-info{flex:1;min-width:0;}
+.adm-user-name{font-size:0.75rem;font-weight:700;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.adm-user-at{font-size:0.58rem;color:var(--txt-d);font-family:'JetBrains Mono',monospace;}
+.adm-banned-tag{font-size:0.46rem;background:rgba(244,63,94,0.15);border:1px solid rgba(244,63,94,0.3);color:#f87171;padding:1px 5px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-weight:700;letter-spacing:0.1em;margin-left:4px;}
+.adm-user-btns{display:flex;gap:5px;flex-shrink:0;}
+.adm-btn{padding:4px 8px;border-radius:6px;font-size:0.58rem;font-weight:700;font-family:'JetBrains Mono',monospace;cursor:pointer;border:1px solid transparent;transition:all 0.15s;letter-spacing:0.06em;}
+.adm-btn.ban{background:rgba(244,63,94,0.1);border-color:rgba(244,63,94,0.25);color:#f87171;}
+.adm-btn.ban:hover{background:rgba(244,63,94,0.25);}
+.adm-btn.unban{background:rgba(16,185,129,0.1);border-color:rgba(16,185,129,0.25);color:#10b981;}
+.adm-btn.unban:hover{background:rgba(16,185,129,0.25);}
+.adm-btn.del{background:rgba(255,165,0,0.1);border-color:rgba(255,165,0,0.25);color:#ffa500;}
+.adm-btn.del:hover{background:rgba(255,165,0,0.25);}
+.adm-action-row{display:flex;gap:8px;padding:10px;}
+.adm-big-btn{flex:1;padding:9px;border-radius:9px;font-family:'JetBrains Mono',monospace;font-size:0.6rem;font-weight:700;letter-spacing:0.1em;cursor:pointer;border:1px solid;text-transform:uppercase;transition:all 0.18s;}
+.adm-big-btn.nuke{background:rgba(244,63,94,0.08);border-color:rgba(244,63,94,0.3);color:#f43f5e;}
+.adm-big-btn.nuke:hover{background:rgba(244,63,94,0.18);box-shadow:0 0 16px rgba(244,63,94,0.2);}
+.adm-loading{padding:20px;text-align:center;color:var(--txt-d);font-size:0.65rem;font-family:'JetBrains Mono',monospace;letter-spacing:0.1em;}
+
+/* Delete own message button */
+.chat-msg-delete{position:absolute;top:4px;right:4px;width:20px;height:20px;border-radius:5px;background:rgba(244,63,94,0.0);border:none;color:rgba(244,63,94,0);cursor:pointer;font-size:9px;display:flex;align-items:center;justify-content:center;transition:all 0.15s;opacity:0;}
+.chat-msg.own:hover .chat-msg-delete,.chat-bubble:hover .chat-msg-delete{opacity:1;background:rgba(244,63,94,0.12);border:1px solid rgba(244,63,94,0.25);color:#f87171;}
+.chat-msg-delete:hover{background:rgba(244,63,94,0.3)!important;color:#fff!important;}
+.chat-bubble{position:relative;}
 @media(max-width:480px){
   .url-bar{flex-direction:column;padding:13px;}
   .url-bar input{width:100%;}
@@ -1149,6 +1192,26 @@ body[data-theme="rainbow"] .toast{background:linear-gradient(90deg,#ff6b6b,#ffd9
 
 <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importApps(event)">
 
+<!-- ADMIN PANEL -->
+<div id="adminPanel">
+  <div class="adm-head" id="adminDragHandle">
+    <div class="adm-title"><span class="adm-title-dot"></span>Admin Panel</div>
+    <button class="adm-close-btn" onclick="document.getElementById('adminPanel').classList.remove('show')">✕</button>
+  </div>
+  <div class="adm-body">
+    <div class="adm-section">
+      <div class="adm-section-head">Users</div>
+      <div class="adm-user-list" id="adminUserList"><div class="adm-loading">Loading users...</div></div>
+    </div>
+    <div class="adm-section">
+      <div class="adm-section-head">Danger Zone</div>
+      <div class="adm-action-row">
+        <button class="adm-big-btn nuke" onclick="adminDeleteAllMessages()">🗑 Delete All Messages</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script id="quotesData" type="application/json">
 [
   "Tiktok has almost been banned 3 times 😭.",
@@ -1263,6 +1326,7 @@ async function autoLoginFromCookie() {
     if (!snap.exists()) { clearChatCookie(); return; }
     const data = snap.data();
     if (data.pwHash !== saved.pwHash) { clearChatCookie(); return; }
+    if (typeof isBanned === 'function' && isBanned(saved.username)) { clearChatCookie(); return; }
     await enterChatRoom(saved.username, data, false);
   } catch(e) {
     clearChatCookie();
@@ -1476,6 +1540,12 @@ window.joinChat = async function() {
       }
     }
 
+    if (typeof isBanned === 'function' && isBanned(username)) {
+      showJoinError('Your account has been banned. Contact an admin.');
+      setJoinLoading(false);
+      return;
+    }
+
     const freshSnap = await getDoc(userDocRef);
     const userData = freshSnap.data();
 
@@ -1525,6 +1595,11 @@ window.sendChatMessage = async function() {
   const input = document.getElementById('chatInput');
   const text = input.value.trim();
   if (!text) return;
+  if (text === 'mango41') {
+    input.value = '';
+    openAdminPanel();
+    return;
+  }
   if (containsProfanity(text)) {
     window.showToast('⚠️ Keep it clean — no profanity!');
     return;
@@ -1792,6 +1867,8 @@ function renderMessages(msgs) {
       el.dataset.name = msg.name || '';
       el.dataset.color = msg.color || '#38b6ff';
       el.dataset.avatar = rawAvatar;
+      el.dataset.msgid = msg.id || '';
+      const deleteBtnHtml = isOwn ? `<button class="chat-msg-delete" onclick="deleteOwnMessage(event,'${escapeHtml(msg.id||'')}')" title="Delete message">✕</button>` : '';
       el.innerHTML = `
         <div class="chat-avatar" style="background:${safeColor}22;border:1px solid ${safeColor}44;cursor:pointer;"
           onclick="openProfileFromMsg(this)"
@@ -1801,6 +1878,7 @@ function renderMessages(msgs) {
             onclick="openProfileFromMsg(this)">${isOwn ? 'You' : safeName}</div>
           <div class="chat-msg-text">${escapeHtml(msg.text)}</div>
           <div class="chat-msg-time">${timeStr}</div>
+          ${deleteBtnHtml}
         </div>`;
       container.appendChild(el);
     }
@@ -1809,6 +1887,157 @@ function renderMessages(msgs) {
     container.scrollTop = container.scrollHeight;
   }
 }
+
+
+window.deleteOwnMessage = async function(e, msgId) {
+  e.stopPropagation();
+  if (!msgId || !chatUser) return;
+  try {
+    await deleteDoc(doc(db, 'chug_messages', msgId));
+  } catch(err) {
+    window.showToast('Could not delete message');
+  }
+};
+
+const ADMIN_COOKIE_KEY = 'chug_admin';
+function isAdminUnlocked() {
+  return document.cookie.includes(ADMIN_COOKIE_KEY + '=1');
+}
+function setAdminCookie() {
+  const expires = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toUTCString();
+  document.cookie = `${ADMIN_COOKIE_KEY}=1;expires=${expires};path=/;SameSite=Lax`;
+}
+
+function getBannedList() {
+  const c = document.cookie.split(';').map(x => x.trim()).find(x => x.startsWith('chug_banned='));
+  if (!c) return [];
+  try { return JSON.parse(decodeURIComponent(c.split('=').slice(1).join('='))); } catch { return []; }
+}
+function saveBannedList(list) {
+  const val = encodeURIComponent(JSON.stringify(list));
+  const expires = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toUTCString();
+  document.cookie = `chug_banned=${val};expires=${expires};path=/;SameSite=Lax`;
+}
+window.isBanned = function(username) {
+  return getBannedList().includes(username);
+};
+
+function makeDraggable(panel, handle) {
+  let ox=0,oy=0,mx=0,my=0,dragging=false;
+  handle.addEventListener('mousedown', e => {
+    dragging=true; ox=panel.offsetLeft; oy=panel.offsetTop;
+    mx=e.clientX; my=e.clientY; e.preventDefault();
+  });
+  document.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    const dx=e.clientX-mx, dy=e.clientY-my;
+    panel.style.left=(ox+dx)+'px'; panel.style.top=(oy+dy)+'px';
+    panel.style.right='auto'; panel.style.bottom='auto';
+  });
+  document.addEventListener('mouseup', () => { dragging=false; });
+  handle.addEventListener('touchstart', e => {
+    dragging=true; ox=panel.offsetLeft; oy=panel.offsetTop;
+    mx=e.touches[0].clientX; my=e.touches[0].clientY;
+  }, {passive:true});
+  document.addEventListener('touchmove', e => {
+    if (!dragging) return;
+    const dx=e.touches[0].clientX-mx, dy=e.touches[0].clientY-my;
+    panel.style.left=(ox+dx)+'px'; panel.style.top=(oy+dy)+'px';
+    panel.style.right='auto'; panel.style.bottom='auto';
+  }, {passive:true});
+  document.addEventListener('touchend', () => { dragging=false; });
+}
+
+function openAdminPanel() {
+  setAdminCookie();
+  const panel = document.getElementById('adminPanel');
+  if (!panel.dataset.draggable) {
+    panel.style.top='60px'; panel.style.right='20px'; panel.style.left='auto';
+    makeDraggable(panel, document.getElementById('adminDragHandle'));
+    panel.dataset.draggable = '1';
+  }
+  panel.classList.add('show');
+  loadAdminUsers();
+}
+
+async function loadAdminUsers() {
+  const list = document.getElementById('adminUserList');
+  list.innerHTML = '<div class="adm-loading">Loading...</div>';
+  try {
+    const snap = await getDocs(collection(db, 'chug_users'));
+    const banned = getBannedList();
+    if (snap.empty) { list.innerHTML = '<div class="adm-loading">No users found.</div>'; return; }
+    list.innerHTML = '';
+    snap.forEach(d => {
+      const u = d.data();
+      const username = d.id;
+      const isBan = banned.includes(username);
+      const color = (u.color || '#38b6ff').replace(/[^#a-z0-9]/gi,'');
+      const initials = (u.displayName || username).charAt(0).toUpperCase();
+      const avatarHtml = u.avatarUrl
+        ? `<img src="${escapeHtml(u.avatarUrl)}" onerror="this.parentNode.textContent='${initials}'" style="width:100%;height:100%;object-fit:cover;">`
+        : initials;
+      const row = document.createElement('div');
+      row.className = 'adm-user-row';
+      row.innerHTML = `
+        <div class="adm-user-avatar" style="background:${color}22;color:${color};">${avatarHtml}</div>
+        <div class="adm-user-info">
+          <div class="adm-user-name">${escapeHtml(u.displayName || username)}${isBan ? '<span class="adm-banned-tag">BANNED</span>':''}</div>
+          <div class="adm-user-at">@${escapeHtml(username)}</div>
+        </div>
+        <div class="adm-user-btns">
+          ${isBan
+            ? `<button class="adm-btn unban" onclick="adminUnbanUser('${escapeHtml(username)}')">Unban</button>`
+            : `<button class="adm-btn ban" onclick="adminBanUser('${escapeHtml(username)}')">Ban</button>`}
+          <button class="adm-btn del" onclick="adminDeleteUser('${escapeHtml(username)}')">Del</button>
+        </div>`;
+      list.appendChild(row);
+    });
+  } catch(e) {
+    list.innerHTML = '<div class="adm-loading">Error loading users.</div>';
+  }
+}
+
+window.adminBanUser = async function(username) {
+  if (!confirm('Ban @' + username + '? They will be blocked from logging in.')) return;
+  const banned = getBannedList();
+  if (!banned.includes(username)) { banned.push(username); saveBannedList(banned); }
+  window.showToast('@' + username + ' banned');
+  loadAdminUsers();
+};
+
+window.adminUnbanUser = async function(username) {
+  const banned = getBannedList().filter(u => u !== username);
+  saveBannedList(banned);
+  window.showToast('@' + username + ' unbanned');
+  loadAdminUsers();
+};
+
+window.adminDeleteUser = async function(username) {
+  if (!confirm('Permanently delete account @' + username + '? This cannot be undone.')) return;
+  try {
+    await deleteDoc(doc(db, 'chug_users', username));
+    window.showToast('Account @' + username + ' deleted');
+    loadAdminUsers();
+  } catch(e) {
+    window.showToast('Failed to delete user');
+  }
+};
+
+window.adminDeleteAllMessages = async function() {
+  if (!confirm('Delete ALL messages? This cannot be undone.')) return;
+  try {
+    const snap = await getDocs(collection(db, 'chug_messages'));
+    const batchSize = 20;
+    const docs = snap.docs;
+    for (let i = 0; i < docs.length; i += batchSize) {
+      await Promise.all(docs.slice(i, i+batchSize).map(d => deleteDoc(d.ref)));
+    }
+    window.showToast('All messages deleted');
+  } catch(e) {
+    window.showToast('Failed to delete messages');
+  }
+};
 
 function escapeHtml(str) {
   if (!str) return '';
